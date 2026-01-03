@@ -2,6 +2,7 @@ package menu.controller;
 
 import java.util.List;
 import menu.domain.Coach;
+import menu.domain.WeeklyCategoryPlan;
 import menu.view.OutputView;
 
 public class MenuController {
@@ -24,6 +25,9 @@ public class MenuController {
             outputView.printCoachNotEatingFoodInputPrompt(coach.getName());
             inputHandler.inputCoachNotEatingFoods();
         });
+
+        WeeklyCategoryPlan weeklyCategoryPlan = new WeeklyCategoryPlan();
+        weeklyCategoryPlan.generateWeeklyCategoryPlan();
     }
 
 
