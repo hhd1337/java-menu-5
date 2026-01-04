@@ -21,28 +21,38 @@ public class MenuController {
 
     public void process() {
         outputView.printServiceStartHeader();
-        outputView.printCoachNameInputPrompt();
-        List<String> coachNames = inputHandler.inputCoachNames();
 
-        List<Coach> coaches = new ArrayList<>();
-        coachNames.forEach(name -> {
-            outputView.printCoachNotEatingFoodInputPrompt(name);
-            coaches.add(inputHandler.inputCoachNotEatingFoods(name));
-        });
+        List<Coach> coaches = readCoaches();
+        WeeklyCategoryPlan weeklyCategoryPlan = createWeeklyCategoryPlan();
+        List<CoachMenuPlan> coachMenuPlans = createCoachMenuPlans(coaches, weeklyCategoryPlan);
+        MenuRecommendResult menuRecommendResult = new MenuRecommendResult(weeklyCategoryPlan, coachMenuPlans);
+        
+    }
 
-        WeeklyCategoryPlan weeklyCategoryPlan = new WeeklyCategoryPlan();
-        weeklyCategoryPlan.generateWeeklyCategoryPlan();
-
-        // 음식 카테고리와 못먹는 메뉴에 따라 추천할 점심 메뉴를 구성함
-        List<CoachMenuPlan> coachMenuPlans = coaches.stream()
+    private List<CoachMenuPlan> createCoachMenuPlans(List<Coach> coaches, WeeklyCategoryPlan weeklyCategoryPlan) {
+        return coaches.stream()
                 .map(coach -> {
                     CoachMenuPlan coachMenuPlan = new CoachMenuPlan(coach.getName());
                     coachMenuPlan.generateFoods(weeklyCategoryPlan, coach);
                     return coachMenuPlan;
                 })
                 .collect(Collectors.toList());
+    }
 
-        MenuRecommendResult menuRecommendResult = new MenuRecommendResult(weeklyCategoryPlan, coachMenuPlans);
+    private WeeklyCategoryPlan createWeeklyCategoryPlan() {
+        WeeklyCategoryPlan weeklyCategoryPlan = new WeeklyCategoryPlan();
+        weeklyCategoryPlan.generateWeeklyCategoryPlan();
+        return weeklyCategoryPlan;
+    }
 
+    private List<Coach> readCoaches() {
+        outputView.printCoachNameInputPrompt();
+        List<String> coachNames = inputHandler.inputCoachNames();
+        List<Coach> coaches = new ArrayList<>();
+        coachNames.forEach(name -> {
+            outputView.printCoachNotEatingFoodInputPrompt(name);
+            coaches.add(inputHandler.inputCoachNotEatingFoods(name));
+        });
+        return coaches;
     }
 }
