@@ -42,7 +42,7 @@ public class MenuController {
                 })
                 .collect(Collectors.toList());
 
-        MenuRecommendResult menuRecommendResult = new MenuRecommendResult(weeklyCategoryPlan.getCategoriesByDay(),
-                coachMenuPlans);
+        MenuRecommendResult menuRecommendResult = new MenuRecommendResult(weeklyCategoryPlan, coachMenuPlans);
+
     }
 }

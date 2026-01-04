@@ -32,6 +32,6 @@ public class WeeklyCategoryPlan {
     }
 
     public Map<DayOfWeek, FoodCategory> getCategoriesByDay() {
-        return this.categoriesByDay;
+        return Map.copyOf(categoriesByDay);
     }
 }
