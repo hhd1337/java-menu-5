@@ -31,14 +31,6 @@ public enum FoodCategory {
         return foodIsInJapanList || foodIsInKoreaList || foodIsInChinaList || foodIsInAsiaList || foodIsInWesternList;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public int getSymbol() {
-        return this.symbol;
-    }
-
     public static FoodCategory findBySymbol(int symbolInput) {
         return Arrays.stream(FoodCategory.values())
                 .filter(foodCategory -> foodCategory.symbol == symbolInput)
@@ -46,7 +38,12 @@ public enum FoodCategory {
                 .orElseThrow(() -> new IllegalArgumentException("FoodCategory의 symbol은 1부터 5 사이만 존재합니다."));
     }
 
-    public String findRandomFoodByCategory(FoodCategory category) {
-        return Randoms.shuffle(category.foods).get(0);
+    public String findRandomFoodByCategory() {
+        return Randoms.shuffle(foods).get(0);
     }
+
+    public String getName() {
+        return this.name;
+    }
+
 }

@@ -2,7 +2,9 @@ package menu.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class WeeklyCategoryPlan {
@@ -31,7 +33,13 @@ public class WeeklyCategoryPlan {
                 .count();
     }
 
-    public Map<DayOfWeek, FoodCategory> getCategoriesByDay() {
-        return Map.copyOf(categoriesByDay);
+    public List<FoodCategory> getCategoriesByDayInOrder() {
+        List<FoodCategory> categories = new ArrayList<>();
+
+        for (int i = 1; i <= 5; i++) {
+            categories.add(categoriesByDay.get(DayOfWeek.of(i)));
+        }
+        return categories;
     }
+
 }
