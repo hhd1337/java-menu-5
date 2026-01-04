@@ -30,4 +30,8 @@ public class WeeklyCategoryPlan {
                 .filter(foodCategory -> foodCategory == randomCategory)
                 .count();
     }
+
+    public Map<DayOfWeek, FoodCategory> getCategoriesByDay() {
+        return this.categoriesByDay;
+    }
 }

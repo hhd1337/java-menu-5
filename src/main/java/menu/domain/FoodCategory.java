@@ -1,5 +1,6 @@
 package menu.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,5 +44,9 @@ public enum FoodCategory {
                 .filter(foodCategory -> foodCategory.symbol == symbolInput)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("FoodCategory의 symbol은 1부터 5 사이만 존재합니다."));
+    }
+
+    public String findRandomFoodByCategory(FoodCategory category) {
+        return Randoms.shuffle(category.foods).get(0);
     }
 }

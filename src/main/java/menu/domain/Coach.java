@@ -6,12 +6,16 @@ public class Coach {
     private String name;
     private List<String> neverEatingFoods;
 
-    public Coach(String name) {
+    public Coach(String name, List<String> neverEatingFoods) {
         this.name = name;
-        this.neverEatingFoods = null;
+        this.neverEatingFoods = neverEatingFoods;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public List<String> getNeverEatingFoods() {
+        return this.neverEatingFoods;
     }
 }

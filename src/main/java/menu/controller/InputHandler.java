@@ -18,8 +18,7 @@ public class InputHandler {
         this.inputTemplate = iteratorInputTemplate;
     }
 
-    public List<Coach> inputCoachNames() {
-        StringToCoachConverter converter = new StringToCoachConverter();
+    public List<String> inputCoachNames() {
         DelimiterParser parser = new DelimiterParser();
         return inputTemplate.execute(
                 inputView::inputCoachNames,
@@ -31,16 +30,13 @@ public class InputHandler {
                     List<String> parsedNames = parser.parseCoachNames(value);
                     // validate
                     validateCoachesInput(parsedNames);
-
-                    for (String name : parsedNames) {
-                        coaches.add(converter.convert(name));
-                    }
-                    return coaches;
+                    return parsedNames;
                 }
         );
     }
 
-    public List<String> inputCoachNotEatingFoods() {
+    public Coach inputCoachNotEatingFoods(String name) {
+        StringToCoachConverter converter = new StringToCoachConverter();
         DelimiterParser parser = new DelimiterParser();
         return inputTemplate.execute(
                 inputView::inputCoachNotEatingFoods,
@@ -49,7 +45,9 @@ public class InputHandler {
                     // parse
                     List<String> parsedFoods = parser.parseFoods(value);
                     // validate & return
-                    return validateNotEatingFoodsInput(parsedFoods);
+                    validateNotEatingFoodsInput(parsedFoods);
+
+                    return new Coach(name, parsedFoods);
                 }
         );
     }
