@@ -2,7 +2,6 @@ package menu.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import menu.converter.StringToCoachConverter;
 import menu.domain.Coach;
 import menu.domain.FoodCategory;
 import menu.util.DelimiterParser;
@@ -36,7 +35,6 @@ public class InputHandler {
     }
 
     public Coach inputCoachNotEatingFoods(String name) {
-        StringToCoachConverter converter = new StringToCoachConverter();
         DelimiterParser parser = new DelimiterParser();
         return inputTemplate.execute(
                 inputView::inputCoachNotEatingFoods,
