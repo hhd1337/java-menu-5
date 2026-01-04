@@ -15,7 +15,7 @@ public class Coach {
         return this.name;
     }
 
-    public List<String> getNeverEatingFoods() {
-        return this.neverEatingFoods;
+    public boolean canNotEat(String food) {
+        return neverEatingFoods.contains(food);
     }
 }
